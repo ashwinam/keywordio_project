@@ -10,7 +10,6 @@ class Books(models.Model):
     genre = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     isbn = models.CharField(max_length=100)
-    count = models.IntegerField(null=True, default=0)
 
     def __str__(self) -> str:
         return self.author

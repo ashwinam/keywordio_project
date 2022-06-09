@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cbv.urls', namespace='cbv')),
     path('books/', include('books.urls', namespace='books')),
+    path('api/', include('api.urls', namespace='api')),
 ]
