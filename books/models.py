@@ -2,7 +2,6 @@ from itertools import count
 from django.db import models
 from django.template.defaultfilters import slugify
 
-
 # Create your models here.
 class Books(models.Model):
     title = models.CharField(max_length=100)
@@ -18,3 +17,9 @@ class Books(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+
+
+
+

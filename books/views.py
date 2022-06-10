@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Books
 from .forms import AddForm
 
@@ -29,25 +30,33 @@ class IndexView(ListView):
 
 #         return 
 
-class AddBookView(CreateView):
+class AddBookView(PermissionRequiredMixin, CreateView):
+
+    raise_exception: bool = False
+    login_url: str = 'http://127.0.0.1:8000/accounts/login'
+    permission_required = 'books.add_books'
+
     model = Books
     form_class = AddForm
     template_name = 'addbooks.html'
-    success_url = '/books/'
+    success_url = '/'
 
 
 
-class BookEditView(UpdateView):
+class BookEditView(PermissionRequiredMixin, UpdateView):
+    raise_exception: bool = False
+    login_url: str = 'http://127.0.0.1:8000/accounts/login'
+    permission_required = 'books.change_books'
+
     model = Books
     form_class = AddForm
     template_name = 'editbooks.html'
-    success_url = '/books/'
+    success_url = '/'
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(PermissionRequiredMixin, DeleteView):
+    raise_exception: bool = False
+    login_url: str = 'http://127.0.0.1:8000/accounts/login'
+    permission_required = 'books.delete_books'
+
     model = Books
-    success_url = '/books/'
-
-
-
-
-###################################_RestApi############################
+    success_url = '/'
